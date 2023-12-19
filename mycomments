@@ -1,0 +1,9 @@
+para instalar o pacote ui: php artisan ui bootstrap --auth
+
+para criar uma controller resource com a model: php artisan make:controller --resource TarefaController --model=Tarefa
+
+para usar o markdown do laravel: php artisan make:mail MensagemTesteEmail --markdown emails.mensagem-teste
+
+para publicar o vendor do email php artisan vendor:publish e selecionar o número da opção laravel-mail
+
+para alterar a rota padrão daquela que entro na aplicação, devo alterar em RouteServiceProviders.php que fica em App/Providers
