@@ -96,7 +96,13 @@ class TarefaController extends Controller
     public function edit(Tarefa $tarefa)
     {
         // dd($tarefa);
-        return view('tarefa.edit', ['tarefa' => $tarefa]);
+        $user_id = auth()->user()->id;
+        // dd($tarefa);
+        if($tarefa->user_id == $user_id){
+            return view('tarefa.edit', ['tarefa' => $tarefa]);
+        }
+
+        return view('acesso-negado');
     }
 
     /**
@@ -108,8 +114,13 @@ class TarefaController extends Controller
         // echo '<hr>';
         // print_r($tarefa->getAttributes());
 
+        if(!$tarefa->user_id ==  auth()->user()->id){
+            return view('acesso-negado');
+        }
+
         $tarefa->update($request->all());
-        return redirect()->route('tarefa.show', [$tarefa->id]);
+        return redirect()->route('tarefa.show', ['tarefa' => $tarefa->id]);
+        
     }
 
     /**
@@ -117,6 +128,12 @@ class TarefaController extends Controller
      */
     public function destroy(Tarefa $tarefa)
     {
-        //
+        if(!$tarefa->user_id ==  auth()->user()->id){
+            return view('acesso-negado');
+        }
+
+        $tarefa->delete();
+        return redirect()->route('tarefa.index');
+
     }
 }
