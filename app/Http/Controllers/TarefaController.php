@@ -95,7 +95,8 @@ class TarefaController extends Controller
      */
     public function edit(Tarefa $tarefa)
     {
-        //
+        // dd($tarefa);
+        return view('tarefa.edit', ['tarefa' => $tarefa]);
     }
 
     /**
@@ -103,7 +104,12 @@ class TarefaController extends Controller
      */
     public function update(Request $request, Tarefa $tarefa)
     {
-        //
+        // print_r($request->all());
+        // echo '<hr>';
+        // print_r($tarefa->getAttributes());
+
+        $tarefa->update($request->all());
+        return redirect()->route('tarefa.show', [$tarefa->id]);
     }
 
     /**
