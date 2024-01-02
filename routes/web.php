@@ -26,6 +26,9 @@ Auth::routes(['verify'=>true]);
 //     ->name('home')
 //     ->middleware('verified');
 
+// Exporta PDF
+Route::get('tarefa/exportar', [TarefaController::class, 'exportar'])->name('tarefa.exportar');
+
 Route::resource('tarefa', TarefaController::class)
     ->middleware('verified');
 
